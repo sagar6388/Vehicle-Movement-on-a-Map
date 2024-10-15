@@ -18,28 +18,28 @@ io.on('connection', (socket) => {
       console.error(err);
       return;
     }
-    
+
     const locations = JSON.parse(data);
     let index = 0;
-    
+
 
     // Set initial lat and lng from the first location in the JSON file
     let lat = locations[index].lat;
     let lng = locations[index].lng;
-    let ts=locations[index].ts;
-    // Set an interval to send location updates every 5 seconds
+    let ts = locations[index].ts;
+    // Set an interval to send location updates every 1 seconds
     const interval = setInterval(() => {
       if (index < locations.length) {
         lat += (Math.random() - 0.5) * 0.001;
-    lng += (Math.random() - 0.5) * 0.001;
-    socket.emit('vehicleUpdate', { lat, lng,ts });
-       
+        lng += (Math.random() - 0.5) * 0.001;
+        socket.emit('vehicleUpdate', { lat, lng, ts });
+
 
         index++;
       } else {
         clearInterval(interval); // Stop sending updates when done
       }
-    }, 1000); 
+    }, 1000);
   });
 
   socket.on('disconnect', () => {
