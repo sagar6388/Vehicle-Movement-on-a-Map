@@ -12,7 +12,7 @@ app.use(express.static('public'));
 io.on('connection', (socket) => {
   console.log('New client connected');
 
-  // Read the JSON file
+  // Read the location JSON file
   fs.readFile('location-data.json', 'utf8', (err, data) => {
     if (err) {
       console.error(err);
